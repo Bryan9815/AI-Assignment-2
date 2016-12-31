@@ -105,8 +105,8 @@ void Application::Init()
 	//Create a window and create its OpenGL context
 	/*m_width = 800;
 	m_height = 600;*/
-	m_width = mode->width;
-	m_height = mode->height;
+	m_width = mode->width * 0.75;
+	m_height = mode->height * 0.75;
 	m_window = glfwCreateWindow(m_width, m_height, "Physics", NULL, NULL);
 
 	//Hide The Cursor Within the Application;

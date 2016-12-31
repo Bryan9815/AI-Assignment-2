@@ -23,7 +23,7 @@ public:
     virtual void SetName(std::string Name);
     virtual std::string GetName();
     virtual float GetScale();
-    virtual std::string ReceiveMsg(std::string inputmsg);
+    virtual void ReceiveMsg(std::string inputmsg);
 protected:
     int HP = 100;
 	unsigned int Aggro = 0;
