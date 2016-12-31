@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "StateMachine.h"
+#include <string>
 class BaseEntity
 {
 public:
@@ -22,6 +23,7 @@ public:
     virtual void SetName(std::string Name);
     virtual std::string GetName();
     virtual float GetScale();
+    virtual std::string ReceiveMsg(std::string inputmsg);
 protected:
     int HP = 100;
 	unsigned int Aggro = 0;
@@ -32,6 +34,7 @@ protected:
     float world_height;
     float scale = 2.f;
 	float ReviveRange = 0.7f;
+    std::string InputMsg;
 };
 
 #endif

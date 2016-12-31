@@ -52,6 +52,7 @@
     <ClInclude Include="Source\SceneCollision.h" />
     <ClInclude Include="Source\SceneKinematics.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\StateMachine.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />

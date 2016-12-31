@@ -217,3 +217,16 @@ BaseEntity* EntityManager::GetNearestDeadHero(string Name_of_finder)
         }
     }
 }
+
+void EntityManager::Talk_to(BaseEntity* talker, string receiver_name, string msg)
+{
+    for (vector<BaseEntity*>::iterator it = EntityList.begin(); it != EntityList.end(); ++it)
+    {
+        if ((*it) == talker)
+            continue;
+        if ((*it)->GetName() == receiver_name)
+        {
+            (*it)->ReceiveMsg(msg);
+        }
+    }
+}
