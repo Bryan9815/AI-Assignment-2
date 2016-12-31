@@ -25,6 +25,8 @@ public:
     bool Mob_getDead();
 
     BaseEntity* GetNearestDeadHero(string Name_of_finder);
+
+    void Talk_to(BaseEntity* talker, string receiver_name, string msg);
     vector<BaseEntity*> EntityList;
 private:
     

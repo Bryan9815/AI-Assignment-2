@@ -63,3 +63,8 @@ float BaseEntity::GetScale()
 {
     return scale;
 }
+
+std::string BaseEntity::ReceiveMsg(std::string inputmsg)
+{
+    InputMsg = inputmsg;
+}
