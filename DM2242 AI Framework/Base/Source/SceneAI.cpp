@@ -311,14 +311,14 @@ void SceneAI::RenderEntityInfo()
     modelStack.PushMatrix();
     modelStack.Translate((m_worldWidth * 0.5f),(m_worldHeight * 0.25f),0);
     modelStack.Scale(m_worldWidth, 1, 1);
-    RenderMesh(meshList[GEO_INFOBORDER], false);
+    RenderMesh(meshList[GEO_WALL], false);
     modelStack.PopMatrix();
     for (vector<BaseEntity*>::iterator it = Entity_Manager->EntityList.begin(); it != Entity_Manager->EntityList.end(); ++it)
     {
         modelStack.PushMatrix();
         Insert_Text_On_Screen(0.f, 10.f, 4.f, Color(1, 1, 1), "Entity:");
         Insert_Text_On_Screen(0.f, 5.f, 4.f, Color(1, 1, 1), " State:");
-        Insert_Text_On_Screen(0.f, 1.5f, 4.f, Color(1, 1, 1), "    HP:");
+        //Insert_Text_On_Screen(0.f, 1.5f, 4.f, Color(1, 1, 1), "    HP:");
 
         //if ((*it)->GetName() == "Warrior")
         //{
