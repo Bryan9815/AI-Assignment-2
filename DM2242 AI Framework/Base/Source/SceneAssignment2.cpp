@@ -689,7 +689,7 @@ void SceneAssignment2::RenderGO(GameObject *go)
 		float angle = Math::RadianToDegree(atan2(go->normal.y, go->normal.x));
 		modelStack.Rotate(angle, 0, 0, 1);
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-		RenderMesh(meshList[GEO_WALL], false);
+		RenderMesh(meshList[GEO_BORDER], false);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
@@ -725,7 +725,7 @@ void SceneAssignment2::RenderGO(GameObject *go)
 		float angle = Math::RadianToDegree(atan2(go->normal.y, go->normal.x));
 		modelStack.Rotate(angle, 0, 0, 1);
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-		RenderMesh(meshList[GEO_WALL], false);
+		RenderMesh(meshList[GEO_BORDER], false);
 		modelStack.PopMatrix();
 		break;
 	}

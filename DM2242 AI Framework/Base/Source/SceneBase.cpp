@@ -104,9 +104,8 @@ void SceneBase::Init()
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 	meshList[GEO_BALL] = MeshBuilder::GenerateSphere("ball", Color(1, 1, 1), 8, 8, 1.f);
 	meshList[GEO_CUBE] = MeshBuilder::GenerateQuad("cube", Color(1, 1, 1), 1.f);
-	meshList[GEO_WALL] = MeshBuilder::GenerateCube("wall", Color(1, 1, 1), 1.f);
-	meshList[GEO_BORDER] = MeshBuilder::GenerateCube("wall", Color(0, 0, 0), 1.f);
-	meshList[GEO_PILLAR] = MeshBuilder::GenerateSphere("pillar", Color(1,1,1), 8, 8, 1.f);
+	meshList[GEO_BORDER] = MeshBuilder::GenerateCube("wall", Color(1, 1, 1), 1.f);
+	meshList[GEO_PILLAR] = MeshBuilder::GenerateSphere("pillar", Color(1, 1, 1), 8, 8, 1.f);
 	meshList[GEO_POWER1] = MeshBuilder::GenerateSphere("power1", Color(0.541, 0.169, 0.886), 10, 10, 1.f);
 	meshList[GEO_ASTEROID] = MeshBuilder::GenerateSphere("asteroid", Color(0.545f, 0.271f, 0.075f), 8, 8, 0.5f);
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
@@ -123,7 +122,8 @@ void SceneBase::Init()
     meshList[GEO_HEALER] = MeshBuilder::GenerateSphere("ball", Color(0.0f, 0.980f, 0.604f), 16, 16, 1.f);
     meshList[GEO_MOB] = MeshBuilder::GenerateSphere("ball", Color(0.576f, 0.439f, 0.859f), 16, 16, 1.f);
 
-    meshList[GEO_INFOBORDER] = MeshBuilder::GenerateCube("wall", Color(1, 1, 1), 1.f);
+	meshList[GEO_RESTAURANT_WALL] = MeshBuilder::GenerateCube("wall", Color(0.000, 0.749, 1.000), 1.f);
+	meshList[GEO_TABLE] = MeshBuilder::GenerateCube("cube", Color(0.722, 0.525, 0.043), 1.f);
 
 	bLightEnabled = false;
 }
