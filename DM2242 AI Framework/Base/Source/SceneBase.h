@@ -47,7 +47,6 @@ public:
 		GEO_TEXT,
 		GEO_BALL,
 		GEO_CUBE,
-		GEO_WALL,
 		GEO_BORDER,
 		GEO_PILLAR,
 		GEO_POWER1,
@@ -61,6 +60,10 @@ public:
         GEO_RANGER,
         GEO_HEALER,
         GEO_MOB,
+
+		//Restaurant
+		GEO_RESTAURANT_WALL,
+		GEO_TABLE,
 
         //Border
         GEO_INFOBORDER,

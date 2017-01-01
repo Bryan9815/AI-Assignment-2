@@ -189,7 +189,7 @@ void SceneAI::RenderGO(GameObject *go)
 		float angle = Math::RadianToDegree(atan2(go->normal.y, go->normal.x));
 		modelStack.Rotate(angle, 0, 0, 1);
 		modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-		RenderMesh(meshList[GEO_WALL], false);
+		RenderMesh(meshList[GEO_BORDER], false);
 		modelStack.PopMatrix();
 	}
 	}
@@ -215,6 +215,7 @@ void SceneAI::Render()
 	modelStack.LoadIdentity();
 
     RenderEntity();
+	RenderRestaurant();
     RenderEntityInfo();
 }
 
@@ -311,7 +312,7 @@ void SceneAI::RenderEntityInfo()
     modelStack.PushMatrix();
     modelStack.Translate((m_worldWidth * 0.5f),(m_worldHeight * 0.25f),0);
     modelStack.Scale(m_worldWidth, 1, 1);
-    RenderMesh(meshList[GEO_WALL], false);
+    RenderMesh(meshList[GEO_BORDER], false);
     modelStack.PopMatrix();
     for (vector<BaseEntity*>::iterator it = Entity_Manager->EntityList.begin(); it != Entity_Manager->EntityList.end(); ++it)
     {
@@ -365,6 +366,51 @@ void SceneAI::RenderEntityInfo()
     }
 
     
+}
+
+void SceneAI::RenderRestaurant()
+{
+	// Restaurant Entrance
+	modelStack.PushMatrix();
+	modelStack.Translate((m_worldWidth * 0.75f), (m_worldHeight * 0.75f), 0);
+	modelStack.Scale(1, (m_worldHeight * 0.5f), 1);
+	RenderMesh(meshList[GEO_RESTAURANT_WALL], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate((m_worldWidth * 0.75f), (m_worldHeight * 0.333f), 0);
+	modelStack.Scale(1, (m_worldHeight * 0.155f), 1);
+	RenderMesh(meshList[GEO_RESTAURANT_WALL], false);
+	modelStack.PopMatrix();
+
+	// Counter & Kitchen
+	modelStack.PushMatrix();
+	modelStack.Translate((m_worldWidth * 0.65f), (m_worldHeight * 0.333f), 0);
+	modelStack.Scale(1, (m_worldHeight * 0.155f), 1);
+	RenderMesh(meshList[GEO_RESTAURANT_WALL], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate((m_worldWidth * 0.35f), 40.55, 0);
+	modelStack.Scale((m_worldWidth * 0.8), 1, 1);
+	RenderMesh(meshList[GEO_RESTAURANT_WALL], false);
+	modelStack.PopMatrix();
+
+	// Tables
+	for (int i = 0; i < 4; i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate((m_worldWidth * 0.1f + i * 30), 60, 0);
+		modelStack.Scale(5, 5, 5);
+		RenderMesh(meshList[GEO_TABLE], false);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate((m_worldWidth * 0.1f + i * 30), 80, 0);
+		modelStack.Scale(5, 5, 5);
+		RenderMesh(meshList[GEO_TABLE], false);
+		modelStack.PopMatrix();
+	}
 }
 
 void SceneAI::Exit()
