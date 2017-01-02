@@ -76,6 +76,11 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\WaiterEntity.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Chef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cashier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,6 +161,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\WaiterEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Chef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Cashier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
