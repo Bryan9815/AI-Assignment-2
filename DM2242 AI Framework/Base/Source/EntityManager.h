@@ -1,9 +1,11 @@
 #ifndef ENTITY_MANAGER_H
 #define ENTITY_MANAGER_H
 #include "BaseEntity.h"
+#include "SingletonTemplate.h"
+
 #include <vector>
 using namespace std;
-class EntityManager
+class EntityManager : public Singleton<EntityManager>
 {
 public:
     EntityManager();

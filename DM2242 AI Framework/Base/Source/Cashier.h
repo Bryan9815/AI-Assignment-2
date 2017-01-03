@@ -10,10 +10,20 @@ public:
     Cashier();
     ~Cashier();
 
-    void Init();
-    void Update();
-private:
+    enum State
+    {
+        Idle,
+        ReceiveOrder,
+        PasssOrderToChef,
+        ReceivePayment,
+    };
 
+    void Init();
+    void Update(double dt);
+    void StateChange();
+private:
+    State state;
+    float state_delay_timer;
 };
 
 

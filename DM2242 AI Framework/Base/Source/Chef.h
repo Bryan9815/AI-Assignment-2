@@ -10,10 +10,20 @@ public:
     Chef();
     ~Chef();
 
-    void Init();
-    void Update();
-private:
+    enum State
+    {
+        Idle,
+        ReceiveOrder,
+        Cook,
+        CallWaiter
+    };
 
+    void Init();
+    void Update(double dt);
+    void StateChange();
+private:
+    State state;
+    float state_delay_timer;
 };
 
 
