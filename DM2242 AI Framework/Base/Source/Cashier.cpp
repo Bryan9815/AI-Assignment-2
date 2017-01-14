@@ -16,9 +16,10 @@ Cashier::~Cashier()
 {
 }
 
-void Cashier::Init()
+void Cashier::Init(Vector3 startpos)
 {
-
+    Position = startpos;
+    scale = 1.f;
 }
 
 void Cashier::Update(double dt)
@@ -37,8 +38,8 @@ void Cashier::StateChange()
     switch (state)
     {
     case Cashier::Idle:
-        if (InputMsg != IDLE_MSG)
-            return;
+        /*if (InputMsg != IDLE_MSG)
+            return;*/
         state = ReceiveOrder;
         EntityManager::GetInstance()->Talk_to(this, "CustomerEntity", "Your order?");
         break;

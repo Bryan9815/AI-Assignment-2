@@ -16,9 +16,9 @@ Chef::~Chef()
 {
 }
 
-void Chef::Init()
+void Chef::Init(Vector3 startpos)
 {
-
+    Position = startpos;
 }
 
 void Chef::Update(double dt)

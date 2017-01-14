@@ -18,7 +18,7 @@ public:
         CallWaiter
     };
 
-    void Init();
+    void Init(Vector3 startpos);
     void Update(double dt);
     void StateChange();
 private:
