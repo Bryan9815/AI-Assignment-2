@@ -1,17 +1,16 @@
-#include "WaiterEntity.h"
+#include "Waiter.h"
 
-WaiterEntity::WaiterEntity()
+Waiter::Waiter()
 {
-	Name = "WaiterEntity";
+	Name = "Waiter";
 }
 
-
-WaiterEntity::~WaiterEntity()
+Waiter::~Waiter()
 {
 	Delete();
 }
 
-void WaiterEntity::Init(EntityManager* EManager, float world_width, float world_height)
+void Waiter::Init(EntityManager* EManager, float world_width, float world_height)
 {
 	this->EManager = EManager;
 	HP = 3000;
@@ -31,7 +30,7 @@ void WaiterEntity::Init(EntityManager* EManager, float world_width, float world_
 	//MobSM.SetState("Chase Target");
 }
 
-void WaiterEntity::Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos)
+void Waiter::Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos)
 {
 	this->EManager = EManager;
 	HP = 3000;
@@ -51,13 +50,13 @@ void WaiterEntity::Init(EntityManager* EManager, float world_width, float world_
 	//MobSM.SetState("Chase Target");
 }
 
-void WaiterEntity::Update(double dt)
+void Waiter::Update(double dt)
 {
 	WrapAroundScreen();
 
 }
 
-void WaiterEntity::WrapAroundScreen()
+void Waiter::WrapAroundScreen()
 {
 #define OFFSET (scale * 0.5f)
 
@@ -72,7 +71,7 @@ void WaiterEntity::WrapAroundScreen()
 		Position.y = world_height + OFFSET;
 }
 
-void WaiterEntity::Delete()
+void Waiter::Delete()
 {
 
 }
