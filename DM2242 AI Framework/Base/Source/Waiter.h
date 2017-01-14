@@ -9,21 +9,26 @@ public:
 	Waiter();
 	~Waiter();
 
-	void Init(EntityManager* EManager, float world_width, float world_height);
-	void Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos);
+	enum State
+	{
+		Idle,
+		Take_Order,
+		Give_Order_To_Cashier,
+		Receive_Food_From_Chef,
+		Bring_Food_To_Table,
+		Pass_Bill_To_Cashier
+	};
+
+	void Init();
 	void Update(double dt);
 	void Delete();
 
 	void DetermineTarget();
 	void WrapAroundScreen();
-
-	StateMachine WaiterSM;
+	void StateUpdate();
 private:
-
-	float Speed;
-	float Cooldown;
-
-	EntityManager* EManager;
+	State state;
+	float state_delay_timer;
 };
 
 #endif
