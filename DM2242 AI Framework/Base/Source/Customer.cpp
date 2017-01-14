@@ -1,17 +1,17 @@
-#include "CustomerEntity.h"
+#include "Customer.h"
 
-CustomerEntity::CustomerEntity()
+Customer::Customer()
 {
-	Name = "CustomerEntity";
+	Name = "Customer";
 }
 
 
-CustomerEntity::~CustomerEntity()
+Customer::~Customer()
 {
 	Delete();
 }
 
-void CustomerEntity::Init(EntityManager* EManager, float world_width, float world_height)
+void Customer::Init(EntityManager* EManager, float world_width, float world_height)
 {
 	this->EManager = EManager;
 	HP = 3000;
@@ -31,7 +31,7 @@ void CustomerEntity::Init(EntityManager* EManager, float world_width, float worl
 	//MobSM.SetState("Chase Target");
 }
 
-void CustomerEntity::Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos)
+void Customer::Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos)
 {
 	this->EManager = EManager;
 	HP = 3000;
@@ -51,13 +51,13 @@ void CustomerEntity::Init(EntityManager* EManager, float world_width, float worl
 	//MobSM.SetState("Chase Target");
 }
 
-void CustomerEntity::Update(double dt)
+void Customer::Update(double dt)
 {
 	WrapAroundScreen();
 
 }
 
-void CustomerEntity::WrapAroundScreen()
+void Customer::WrapAroundScreen()
 {
 #define OFFSET (scale * 0.5f)
 
@@ -72,7 +72,7 @@ void CustomerEntity::WrapAroundScreen()
 		Position.y = world_height + OFFSET;
 }
 
-void CustomerEntity::Delete()
+void Customer::Delete()
 {
 
 }
