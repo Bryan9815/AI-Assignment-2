@@ -35,6 +35,7 @@ public:
     void RenderEntity();
     void RenderEntityInfo();
 	void RenderRestaurant();
+    void RenderMessageHistory();
 protected:
 
 	//Physics

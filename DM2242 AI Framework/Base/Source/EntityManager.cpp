@@ -227,6 +227,18 @@ void EntityManager::Talk_to(BaseEntity* talker, string receiver_name, string msg
         if ((*it)->GetName() == receiver_name)
         {
             (*it)->ReceiveMsg(msg);
+
+            if (MessageHistory.size() == 5)
+            {
+                vector<std::string>::iterator it2 = MessageHistory.begin();
+                MessageHistory.erase(it2);
+            }
+            string temp = talker->GetName();
+            temp += " to ";
+            temp += receiver_name;
+            temp += ": ";
+            temp += msg;
+            MessageHistory.push_back(temp);
         }
     }
 }

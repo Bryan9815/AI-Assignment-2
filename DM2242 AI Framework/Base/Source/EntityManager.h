@@ -31,7 +31,7 @@ public:
     void Talk_to(BaseEntity* talker, string receiver_name, string msg);
     vector<BaseEntity*> EntityList;
 private:
-    
+    vector<std::string> MessageHistory;
 };
 
 #endif

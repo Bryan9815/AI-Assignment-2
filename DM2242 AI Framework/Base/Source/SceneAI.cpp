@@ -359,6 +359,13 @@ void SceneAI::RenderRestaurant()
 	}
 }
 
+void SceneAI::RenderMessageHistory()
+{
+    modelStack.PushMatrix();
+
+    modelStack.PopMatrix();
+}
+
 void SceneAI::Exit()
 {
 	SceneBase::Exit();
@@ -374,4 +381,8 @@ void SceneAI::Exit()
 		delete m_ghost;
 		m_ghost = NULL;
 	}
+}
+void SceneAI::RenderMEssageHistory()
+{
+
 }
