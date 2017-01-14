@@ -1,13 +1,13 @@
-#ifndef WAITER_ENTITY_H
-#define WAITER_ENTITY_H
+#ifndef WAITER_H
+#define WAITER_H
 
 #include "EntityManager.h"
 
-class WaiterEntity : public BaseEntity
+class Waiter : public BaseEntity
 {
 public:
-	WaiterEntity();
-	~WaiterEntity();
+	Waiter();
+	~Waiter();
 
 	void Init(EntityManager* EManager, float world_width, float world_height);
 	void Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos);

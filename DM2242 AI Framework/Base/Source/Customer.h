@@ -1,13 +1,13 @@
-#ifndef CUSTOMER_ENTITY_H
-#define CUSTOMER_ENTITY_H
+#ifndef CUSTOMER_H
+#define CUSTOMER_H
 
 #include "EntityManager.h"
 
-class CustomerEntity : public BaseEntity
+class Customer : public BaseEntity
 {
 public:
-	CustomerEntity();
-	~CustomerEntity();
+	Customer();
+	~Customer();
 
 	void Init(EntityManager* EManager, float world_width, float world_height);
 	void Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos);
