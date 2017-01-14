@@ -39,12 +39,12 @@ void Chef::StateChange()
     case Chef::Idle:
         if (InputMsg != IDLE_MSG)
             return;
-        state = ReceiveOrder;
-        EntityManager::GetInstance()->Talk_to(this, "Cashier", "Got it");
+        state = ReceiveOrder;        
         break;
     case Chef::ReceiveOrder:
         if (InputMsg != RECEIVEORDER_MSG)
             return;
+        EntityManager::GetInstance()->Talk_to(this, "Cashier", "Got it");
         state = Cook;
         break;
     case Chef::Cook:
@@ -55,6 +55,7 @@ void Chef::StateChange()
     case Chef::CallWaiter:
         if (InputMsg != CALLWAITER_MSG)
             return;
+        EntityManager::GetInstance()->Talk_to(this, "Waiter", "Here's the food");
         state = Idle;
         break;
     default:
