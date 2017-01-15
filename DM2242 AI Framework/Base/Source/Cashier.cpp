@@ -10,6 +10,7 @@ Cashier::Cashier()
     Name = "Cashier";
     state = Idle;
     state_delay_timer = 0;
+    EntityManager::GetInstance()->AddEntity(this);
 }
 
 Cashier::~Cashier()

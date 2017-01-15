@@ -17,7 +17,7 @@ public:
 	virtual void SetAggro(unsigned int aggro);
     virtual bool GetDead();
     virtual void SetDead(bool dead);
-    virtual void Delete() = 0;
+    void Delete();
     virtual void SetPosition(Vector3 pos);
     virtual Vector3 GetPosition();
     virtual void SetName(std::string Name);

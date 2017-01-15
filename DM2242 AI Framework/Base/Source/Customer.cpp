@@ -3,6 +3,7 @@
 Customer::Customer()
 {
 	Name = "Customer";
+    EntityManager::GetInstance()->AddEntity(this);
 }
 
 

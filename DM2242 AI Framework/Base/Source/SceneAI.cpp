@@ -4,6 +4,8 @@
 #include <sstream>
 #include "Waiter.h"
 #include "Chef.h"
+#include "Cashier.h"
+#include "Customer.h"
 
 SceneAI::SceneAI()
 {
@@ -32,7 +34,7 @@ void SceneAI::Init()
 	m_objectCount = 0;
 	m_ghost = new GameObject(GameObject::GO_BALL);
 
-    Entity_Manager = new EntityManager();
+    Entity_Manager = EntityManager::GetInstance();
     Entity_Manager->Init();
 
 
@@ -55,6 +57,15 @@ void SceneAI::Init()
     warrior->Init(Entity_Manager, EntityMoveWidth, EntityMoveHeight);
     Healer->Init(Entity_Manager, EntityMoveWidth, EntityMoveHeight);
     mob->Init(Entity_Manager, EntityMoveWidth, EntityMoveHeight);*/
+    Chef *chef = new Chef();
+    chef->Init(Vector3(m_worldWidth * 0.4f, m_worldHeight * 0.3f, 0));
+    Waiter *waiter = new Waiter();
+    waiter->Init();
+    /*Customer *customer = new Customer();
+    customer->Init()*/
+    
+    /*Cashier *cashier = new Cashier();
+    cashier->Init(Vector3(0,0,0));*/
 }
 
 GameObject* SceneAI::FetchGO()
@@ -219,6 +230,7 @@ void SceneAI::Render()
     RenderEntity();
 	RenderRestaurant();
     RenderEntityInfo();
+    RenderMessageHistory();
 }
 
 void SceneAI::RenderEntity()
@@ -227,12 +239,19 @@ void SceneAI::RenderEntity()
     for (vector<BaseEntity*>::iterator it = Entity_Manager->EntityList.begin(); it != Entity_Manager->EntityList.end(); ++it)
     {
         modelStack.PushMatrix();
-        if ((*it)->GetName() == "Cashier")
+        if ((*it)->GetName() == "Chef")
         {
             Vector3 temp = (*it)->GetPosition();
             modelStack.Translate(temp.x, temp.y, temp.z);
             modelStack.Scale((*it)->GetScale(), (*it)->GetScale(), (*it)->GetScale());
             RenderMesh(meshList[GEO_RANGER], false);
+        }
+        else if ((*it)->GetName() == "Waiter")
+        {
+            Vector3 temp = (*it)->GetPosition();
+            modelStack.Translate(temp.x, temp.y, temp.z);
+            modelStack.Scale((*it)->GetScale(), (*it)->GetScale(), (*it)->GetScale());
+            RenderMesh(meshList[GEO_HEALER], false);
         }
         else
         {
@@ -368,9 +387,10 @@ void SceneAI::RenderMessageHistory()
     
     for (int i = 0; i < EntityManager::GetInstance()->MessageHistory.size(); i++)
     {
-        modelStack.PushMatrix();
-
-        modelStack.PopMatrix();
+        /*modelStack.PushMatrix();
+        modelStack.Translate
+        modelStack.PopMatrix();*/
+        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.05 + 0.02 * i), 1.f, Color(1.f, 1.f, 1.f), EntityManager::GetInstance()->MessageHistory[i]);
     }
     
 }

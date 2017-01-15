@@ -8,6 +8,7 @@
 Waiter::Waiter()
 {
 	Name = "Waiter";
+    EntityManager::GetInstance()->AddEntity(this);
 }
 
 Waiter::~Waiter()
