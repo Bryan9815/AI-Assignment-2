@@ -23,6 +23,7 @@ public:
 	void Update(double dt);
 
 	void StateUpdate(double dt);
+    std::string getState();
 private:
 	State state;
 	float state_delay_timer;
