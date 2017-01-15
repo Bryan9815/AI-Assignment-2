@@ -29,6 +29,8 @@ public:
     BaseEntity* GetNearestDeadHero(string Name_of_finder);
 
     void Talk_to(BaseEntity* talker, string receiver_name, string msg);
+    BaseEntity* Find(string Entity_name);
+
     vector<BaseEntity*> EntityList;
     vector<std::string> MessageHistory;
 private:

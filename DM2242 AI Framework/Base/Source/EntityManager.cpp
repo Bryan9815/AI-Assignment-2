@@ -242,3 +242,15 @@ void EntityManager::Talk_to(BaseEntity* talker, string receiver_name, string msg
         }
     }
 }
+
+BaseEntity* EntityManager::Find(string Entity_name)
+{
+    for (vector<BaseEntity*>::iterator it = EntityList.begin(); it != EntityList.end(); ++it)
+    {
+        if ((*it)->GetName() == Entity_name)
+        {
+            return (*it);
+        }
+    }
+    return NULL;
+}

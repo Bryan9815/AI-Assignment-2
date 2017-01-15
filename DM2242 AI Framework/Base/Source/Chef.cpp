@@ -3,12 +3,12 @@
 #define IDLE_MSG "New order!"
 #define RECEIVEORDER_MSG ""
 #define COOK_MSG ""
-#define CALLWAITER_MSG ""
+#define CALLWAITER_MSG "On the way!"
 #define DELAY_TIME 2.f
 Chef::Chef()
 {
     Name = "Chef";
-    state = Idle;
+    state = Cook;
     state_delay_timer = 0;
     EntityManager::GetInstance()->AddEntity(this);
 }
@@ -51,11 +51,11 @@ void Chef::StateChange()
         if (InputMsg != COOK_MSG)
             //return;
         state = CallWaiter;
+        EntityManager::GetInstance()->Talk_to(this, "Waiter", "Food's ready!");
         break;
     case Chef::CallWaiter:
         if (InputMsg != CALLWAITER_MSG)
             return;
-        EntityManager::GetInstance()->Talk_to(this, "Waiter", "Here's the food");
         state = Idle;
         break;
     default:
