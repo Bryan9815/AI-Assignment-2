@@ -363,9 +363,14 @@ void SceneAI::RenderMessageHistory()
 {
     if (EntityManager::GetInstance()->MessageHistory.size() == 0)
         return;
-    modelStack.PushMatrix();
+    
+    for (int i = 0; i < EntityManager::GetInstance()->MessageHistory.size(); i++)
+    {
+        modelStack.PushMatrix();
 
-    modelStack.PopMatrix();
+        modelStack.PopMatrix();
+    }
+    
 }
 
 void SceneAI::Exit()
