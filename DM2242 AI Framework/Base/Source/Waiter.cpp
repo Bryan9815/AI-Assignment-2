@@ -19,30 +19,27 @@ void Waiter::Init()
 {
 	state = Idle;
 	state_delay_timer = 0;
-	Position = (137.777, 40, 0);
+	Position.Set(120, 50, 0);
+	TablePos.Set(117.777, 60, 0);
 }
 
 void Waiter::Update(double dt)
 {
-	WrapAroundScreen();
+	ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
+	distFromChef = EntityManager::GetInstance()->FindDistanceBetweenEntities("Waiter", "Chef");
+	distFromTable = (Position - TablePos).Length();
+	switch (state)
+	{
+	case Waiter::Receive_Food_From_Chef:
+		Position += (ChefPos - Position).Normalize() * 10 * dt;
+		break;
+	case Waiter::Bring_Food_To_Table:
+		Position += (TablePos - Position).Normalize() * 10 * dt;
+		break;
+	}
 	if (state_delay_timer < DELAY_TIME)
 		state_delay_timer += dt;
 	StateUpdate(dt);
-}
-
-void Waiter::WrapAroundScreen()
-{
-#define OFFSET (scale * 0.5f)
-
-	if (Position.x > world_width + OFFSET)
-		Position.x = -OFFSET;
-	else if (Position.x < 0 - OFFSET)
-		Position.x = world_width + OFFSET;
-
-	if (Position.y > world_height + OFFSET)
-		Position.y = -OFFSET;
-	else if (Position.y < -OFFSET)
-		Position.y = world_height + OFFSET;
 }
 
 void Waiter::StateUpdate(double dt)
@@ -67,17 +64,13 @@ void Waiter::StateUpdate(double dt)
 		break;
 	case Waiter::Receive_Food_From_Chef:
 	{
-		Vector3 ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
-		Position += (ChefPos - Position) * dt;
-		if (Position == ChefPos)
+		if (distFromChef <= 1.f)
 			state = Bring_Food_To_Table;
 		break;
 	}
 	case Waiter::Bring_Food_To_Table:
 	{
-		Vector3 TablePos = (137.777, 60, 0);
-		Position += (TablePos - Position) * dt;
-		if (Position == TablePos)
+		if (distFromTable <= 1.f)
 			state = Pass_Bill_To_Cashier;
 		break;
 	}

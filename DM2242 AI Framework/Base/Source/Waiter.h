@@ -22,12 +22,16 @@ public:
 	void Init();
 	void Update(double dt);
 
-	void DetermineTarget();
-	void WrapAroundScreen();
 	void StateUpdate(double dt);
 private:
 	State state;
 	float state_delay_timer;
+
+	Vector3 ChefPos;
+	Vector3 TablePos;
+
+	float distFromChef;
+	float distFromTable;
 };
 
 #endif
