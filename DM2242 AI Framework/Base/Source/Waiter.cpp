@@ -12,7 +12,6 @@ Waiter::Waiter()
 
 Waiter::~Waiter()
 {
-	Delete();
 }
 
 void Waiter::Init()
