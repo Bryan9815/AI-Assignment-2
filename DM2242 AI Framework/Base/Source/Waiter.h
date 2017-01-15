@@ -21,7 +21,6 @@ public:
 
 	void Init();
 	void Update(double dt);
-	void Delete();
 
 	void DetermineTarget();
 	void WrapAroundScreen();

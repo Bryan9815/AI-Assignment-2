@@ -2,6 +2,8 @@
 #include "GL\glew.h"
 #include "Application.h"
 #include <sstream>
+#include "Waiter.h"
+#include "Chef.h"
 
 SceneAI::SceneAI()
 {

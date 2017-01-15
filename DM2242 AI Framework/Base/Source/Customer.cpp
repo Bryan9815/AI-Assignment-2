@@ -8,7 +8,6 @@ Customer::Customer()
 
 Customer::~Customer()
 {
-	Delete();
 }
 
 void Customer::Init(EntityManager* EManager, float world_width, float world_height)
@@ -70,9 +69,4 @@ void Customer::WrapAroundScreen()
 		Position.y = -OFFSET;
 	else if (Position.y < -OFFSET)
 		Position.y = world_height + OFFSET;
-}
-
-void Customer::Delete()
-{
-
 }
