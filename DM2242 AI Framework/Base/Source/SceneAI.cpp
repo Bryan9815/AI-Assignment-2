@@ -58,7 +58,7 @@ void SceneAI::Init()
     Healer->Init(Entity_Manager, EntityMoveWidth, EntityMoveHeight);
     mob->Init(Entity_Manager, EntityMoveWidth, EntityMoveHeight);*/
     Chef *chef = new Chef();
-    chef->Init(Vector3(m_worldWidth * 0.4f, m_worldHeight * 0.3f, 0));
+    chef->Init(Vector3(m_worldWidth * 0.4f, m_worldHeight * 0.33f, 0));
     Waiter *waiter = new Waiter();
     waiter->Init();
     /*Customer *customer = new Customer();
