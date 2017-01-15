@@ -65,11 +65,21 @@ void Waiter::StateUpdate()
 		state = Idle;
 		break;
 	case Waiter::Receive_Food_From_Chef:
-		state = Bring_Food_To_Table;
+	{
+		Vector3 ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
+		Position += (ChefPos - Position) * 0.3333f;
+		if (Position == ChefPos)
+			state = Bring_Food_To_Table;
 		break;
+	}
 	case Waiter::Bring_Food_To_Table:
-		state = Pass_Bill_To_Cashier;
+	{
+		Vector3 TablePos = (137.777, 60, 0);
+		Position += (TablePos - Position) * 0.3333f;
+		if (Position == TablePos)
+			state = Pass_Bill_To_Cashier;
 		break;
+	}
 	case Waiter::Pass_Bill_To_Cashier:
 		EntityManager::GetInstance()->Talk_to(this, "Cashier", PASS_BILL_MSG);
 		state = Idle;
