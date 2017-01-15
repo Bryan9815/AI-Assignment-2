@@ -20,7 +20,7 @@ Cashier::~Cashier()
 void Cashier::Init(Vector3 startpos)
 {
     Position = startpos;
-    scale = 1.f;
+    scale = 3.f;
 }
 
 void Cashier::Update(double dt)
