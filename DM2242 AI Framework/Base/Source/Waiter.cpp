@@ -19,14 +19,17 @@ void Waiter::Init()
 {
 	state = Idle;
 	state_delay_timer = 0;
+	scale = 3.f;
 	Position.Set(120, 50, 0);
-	TablePos.Set(117.777, 60, 0);
+	TablePos.Set(107.777, 60, 0);
 }
 
 void Waiter::Update(double dt)
 {
 	ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
 	distFromChef = EntityManager::GetInstance()->FindDistanceBetweenEntities("Waiter", "Chef");
+	CashierPos = EntityManager::GetInstance()->Find("Cashier")->GetPosition();
+	distFromCashier = EntityManager::GetInstance()->FindDistanceBetweenEntities("Waiter", "Cashier");
 	distFromTable = (Position - TablePos).Length();
 	switch (state)
 	{
@@ -36,6 +39,8 @@ void Waiter::Update(double dt)
 	case Waiter::Bring_Food_To_Table:
 		Position += (TablePos - Position).Normalize() * 10 * dt;
 		break;
+	case Waiter::Pass_Bill_To_Cashier:
+		Position += (CashierPos - Position).Normalize() * 10 * dt;
 	}
 	if (state_delay_timer < DELAY_TIME)
 		state_delay_timer += dt;
@@ -75,8 +80,11 @@ void Waiter::StateUpdate(double dt)
 		break;
 	}
 	case Waiter::Pass_Bill_To_Cashier:
-		EntityManager::GetInstance()->Talk_to(this, "Cashier", PASS_BILL_MSG);
-		state = Idle;
+		if (distFromCashier <= 1.f)
+		{
+			EntityManager::GetInstance()->Talk_to(this, "Cashier", PASS_BILL_MSG);
+			state = Idle;
+		}
 		break;
 	default:
 		break;

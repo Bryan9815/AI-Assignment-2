@@ -61,6 +61,8 @@ void SceneAI::Init()
     chef->Init(Vector3(m_worldWidth * 0.4f, m_worldHeight * 0.33f, 0));
     Waiter *waiter = new Waiter();
     waiter->Init();
+	Cashier *cashier = new Cashier();
+	cashier->Init(Vector3(m_worldWidth *0.7f, m_worldHeight * 0.333f, 0));
     /*Customer *customer = new Customer();
     customer->Init()*/
     
@@ -255,7 +257,10 @@ void SceneAI::RenderEntity()
         }
         else
         {
-
+			Vector3 temp = (*it)->GetPosition();
+			modelStack.Translate(temp.x, temp.y, temp.z);
+			modelStack.Scale((*it)->GetScale(), (*it)->GetScale(), (*it)->GetScale());
+			RenderMesh(meshList[GEO_WARRIOR], false);
         }
         modelStack.PopMatrix();
     }

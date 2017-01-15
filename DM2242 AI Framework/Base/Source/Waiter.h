@@ -28,10 +28,12 @@ private:
 	float state_delay_timer;
 
 	Vector3 ChefPos;
+	Vector3 CashierPos;
 	Vector3 TablePos;
 
 	float distFromChef;
 	float distFromTable;
+	float distFromCashier;
 };
 
 #endif
