@@ -24,7 +24,7 @@ public:
 
 	void DetermineTarget();
 	void WrapAroundScreen();
-	void StateUpdate();
+	void StateUpdate(double dt);
 private:
 	State state;
 	float state_delay_timer;

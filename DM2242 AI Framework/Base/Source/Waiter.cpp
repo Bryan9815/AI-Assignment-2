@@ -19,6 +19,7 @@ void Waiter::Init()
 {
 	state = Idle;
 	state_delay_timer = 0;
+	Position = (137.777, 40, 0);
 }
 
 void Waiter::Update(double dt)
@@ -26,7 +27,7 @@ void Waiter::Update(double dt)
 	WrapAroundScreen();
 	if (state_delay_timer < DELAY_TIME)
 		state_delay_timer += dt;
-	StateUpdate();
+	StateUpdate(dt);
 }
 
 void Waiter::WrapAroundScreen()
@@ -44,7 +45,7 @@ void Waiter::WrapAroundScreen()
 		Position.y = world_height + OFFSET;
 }
 
-void Waiter::StateUpdate()
+void Waiter::StateUpdate(double dt)
 {
 	if (state_delay_timer < DELAY_TIME)
 		return;
@@ -67,7 +68,7 @@ void Waiter::StateUpdate()
 	case Waiter::Receive_Food_From_Chef:
 	{
 		Vector3 ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
-		Position += (ChefPos - Position) * 0.3333f;
+		Position += (ChefPos - Position) * dt;
 		if (Position == ChefPos)
 			state = Bring_Food_To_Table;
 		break;
@@ -75,7 +76,7 @@ void Waiter::StateUpdate()
 	case Waiter::Bring_Food_To_Table:
 	{
 		Vector3 TablePos = (137.777, 60, 0);
-		Position += (TablePos - Position) * 0.3333f;
+		Position += (TablePos - Position) * dt;
 		if (Position == TablePos)
 			state = Pass_Bill_To_Cashier;
 		break;
