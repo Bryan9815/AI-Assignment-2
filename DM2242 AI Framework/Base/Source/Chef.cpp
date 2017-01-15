@@ -65,3 +65,25 @@ void Chef::StateChange()
     state_delay_timer = 0.f;
     InputMsg = "";
 }
+
+std::string Chef::getState()
+{
+    switch (state)
+    {
+    case Chef::Idle:
+        return "Idle";
+        break;
+    case Chef::ReceiveOrder:
+        return "ReceiveOrder";
+        break;
+    case Chef::Cook:
+        return "Cook";
+        break;
+    case Chef::CallWaiter:
+        return "CallWaiter";
+        break;
+    default:
+        break;
+    }
+    return "";
+}

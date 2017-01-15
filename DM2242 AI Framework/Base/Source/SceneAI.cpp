@@ -245,6 +245,8 @@ void SceneAI::RenderEntity()
             modelStack.Translate(temp.x, temp.y, temp.z);
             modelStack.Scale((*it)->GetScale(), (*it)->GetScale(), (*it)->GetScale());
             RenderMesh(meshList[GEO_RANGER], false);
+            
+
         }
         else if ((*it)->GetName() == "Waiter")
         {
@@ -283,8 +285,8 @@ void SceneAI::RenderEntityInfo()
     for (vector<BaseEntity*>::iterator it = Entity_Manager->EntityList.begin(); it != Entity_Manager->EntityList.end(); ++it)
     {
         modelStack.PushMatrix();
-        Insert_Text_On_Screen(0.f, 10.f, 4.f, Color(1, 1, 1), "Entity:");
-        Insert_Text_On_Screen(0.f, 5.f, 4.f, Color(1, 1, 1), " State:");
+        //Insert_Text_On_Screen(0.f, 10.f, 4.f, Color(1, 1, 1), "Entity:");
+        //Insert_Text_On_Screen(0.f, 5.f, 4.f, Color(1, 1, 1), " State:");
         /*Insert_Text_On_Screen(0.f, 1.5f, 4.f, Color(1, 1, 1), "    HP:");
 
         if ((*it)->GetName() == "Warrior")
@@ -329,6 +331,17 @@ void SceneAI::RenderEntityInfo()
 
         }
         */
+
+        if ((*it)->GetName() == "Chef")
+        {
+            Chef* chef = dynamic_cast<Chef*>((*it));
+            Insert_Text_On_Screen(chef->GetPosition().x - 2.f, chef->GetPosition().y - 4.f, 2.f, Color(1.f, 1.f, 1.f), chef->getState());
+        }
+        else if ((*it)->GetName() == "Waiter")
+        {
+            Waiter* waiter = dynamic_cast<Waiter*>((*it));
+            Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y - 4.f, 2.f, Color(1.f, 1.f, 1.f), waiter->getState());
+        }
         modelStack.PopMatrix();
     }
 

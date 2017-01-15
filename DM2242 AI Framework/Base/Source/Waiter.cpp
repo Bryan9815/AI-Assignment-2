@@ -91,3 +91,31 @@ void Waiter::StateUpdate(double dt)
 	state_delay_timer = 0.f;
 	InputMsg = "";
 }
+
+std::string Waiter::getState()
+{
+    switch (state)
+    {
+    case Waiter::Idle:
+        return "Idle";
+        break;
+    case Waiter::Take_Order:
+        return "Take_Order";
+        break;
+    case Waiter::Give_Order_To_Cashier:
+        return "Give_Order_To_Cashier";
+        break;
+    case Waiter::Receive_Food_From_Chef:
+        return "Receive_Food_From_Chef";
+        break;
+    case Waiter::Bring_Food_To_Table:
+        return "Bring_Food_To_Table";
+        break;
+    case Waiter::Pass_Bill_To_Cashier:
+        return "Pass_Bill_To_Cashier";
+        break;
+    default:
+        break;
+    }
+    return "";
+}
