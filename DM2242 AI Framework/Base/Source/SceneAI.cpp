@@ -390,7 +390,7 @@ void SceneAI::RenderMessageHistory()
         /*modelStack.PushMatrix();
         modelStack.Translate
         modelStack.PopMatrix();*/
-        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.05 + 0.02 * i), 1.f, Color(1.f, 1.f, 1.f), EntityManager::GetInstance()->MessageHistory[i]);
+        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.05 + 0.025 * i), 3.f, Color(1.f, 1.f, 1.f), EntityManager::GetInstance()->MessageHistory[i]);
     }
     
 }
