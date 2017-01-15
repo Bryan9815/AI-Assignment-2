@@ -20,6 +20,7 @@ Chef::~Chef()
 void Chef::Init(Vector3 startpos)
 {
     Position = startpos;
+    scale = 3.f;
 }
 
 void Chef::Update(double dt)
@@ -48,10 +49,10 @@ void Chef::StateChange()
         state = Cook;
         break;
     case Chef::Cook:
-        if (InputMsg != COOK_MSG)
+        //if (InputMsg != COOK_MSG)
             //return;
-        state = CallWaiter;
         EntityManager::GetInstance()->Talk_to(this, "Waiter", "Food's ready!");
+        state = CallWaiter;        
         break;
     case Chef::CallWaiter:
         if (InputMsg != CALLWAITER_MSG)
