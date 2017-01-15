@@ -361,6 +361,8 @@ void SceneAI::RenderRestaurant()
 
 void SceneAI::RenderMessageHistory()
 {
+    if (EntityManager::GetInstance()->MessageHistory.size() == 0)
+        return;
     modelStack.PushMatrix();
 
     modelStack.PopMatrix();
@@ -381,8 +383,4 @@ void SceneAI::Exit()
 		delete m_ghost;
 		m_ghost = NULL;
 	}
-}
-void SceneAI::RenderMEssageHistory()
-{
-
 }
