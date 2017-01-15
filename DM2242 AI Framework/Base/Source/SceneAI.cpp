@@ -340,12 +340,12 @@ void SceneAI::RenderEntityInfo()
         if ((*it)->GetName() == "Chef")
         {
             Chef* chef = dynamic_cast<Chef*>((*it));
-            Insert_Text_On_Screen(chef->GetPosition().x - 2.f, chef->GetPosition().y - 4.f, 2.f, Color(1.f, 1.f, 1.f), chef->getState());
+            Insert_Text_On_Screen(chef->GetPosition().x - 2.f, chef->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), chef->getState());
         }
         else if ((*it)->GetName() == "Waiter")
         {
             Waiter* waiter = dynamic_cast<Waiter*>((*it));
-            Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y - 4.f, 2.f, Color(1.f, 1.f, 1.f), waiter->getState());
+            Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), waiter->getState());
         }
         modelStack.PopMatrix();
     }
