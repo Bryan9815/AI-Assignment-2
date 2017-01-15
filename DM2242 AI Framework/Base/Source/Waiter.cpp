@@ -20,7 +20,8 @@ void Waiter::Init()
 	state = Idle;
 	state_delay_timer = 0;
 	scale = 3.f;
-	Position.Set(120, 50, 0);
+	StartPos.Set(120, 55, 0);
+	Position = StartPos;
 	TablePos.Set(107.777, 60, 0);
 }
 
@@ -33,6 +34,12 @@ void Waiter::Update(double dt)
 	distFromTable = (Position - TablePos).Length();
 	switch (state)
 	{
+	case Waiter::Idle:
+		if (Position != StartPos)
+		{
+			Position += (StartPos - Position).Normalize() * 10 * dt;
+		}
+		break;
 	case Waiter::Receive_Food_From_Chef:
 		Position += (ChefPos - Position).Normalize() * 10 * dt;
 		break;
