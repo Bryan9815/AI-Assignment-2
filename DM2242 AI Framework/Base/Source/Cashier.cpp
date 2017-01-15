@@ -27,7 +27,7 @@ void Cashier::Update(double dt)
 {
     if (state_delay_timer < DELAY_TIME)
         state_delay_timer += dt;
-    StateChange();
+    //StateChange();
     InputMsg = "";
 }
 
