@@ -27,6 +27,7 @@ private:
 	State state;
 	float state_delay_timer;
 
+	Vector3 StartPos;
 	Vector3 ChefPos;
 	Vector3 CashierPos;
 	Vector3 TablePos;
