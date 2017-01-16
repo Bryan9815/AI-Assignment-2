@@ -51,6 +51,7 @@ void Waiter::Update(double dt)
 	case Waiter::Pass_Bill_To_Cashier:
 		if (distFromCashier >= (scale + scale + 0.5f))
 			Position += (CashierPos - Position).Normalize() * 10 * dt;
+		break;
 	}
 	if (state_delay_timer < DELAY_TIME)
 		state_delay_timer += dt;

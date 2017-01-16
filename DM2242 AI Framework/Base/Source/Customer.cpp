@@ -1,73 +1,100 @@
 #include "Customer.h"
+#define DELAY_TIME 2.f
 
 Customer::Customer()
 {
 	Name = "Customer";
-    EntityManager::GetInstance()->AddEntity(this);
+	EntityManager::GetInstance()->AddEntity(this);
 }
-
 
 Customer::~Customer()
 {
 }
 
-void Customer::Init(EntityManager* EManager, float world_width, float world_height)
+void Customer::Init()
 {
-	this->EManager = EManager;
-	HP = 3000;
-	SetPosition(Vector3(50, 50, 0));
-	this->world_height = world_height;
-	this->world_width = world_width;
-	Speed = 5.f;
-	scale = 4.f;
-
-	//States
-	//MobSM.AddState("Chase Target");
-	//MobSM.AddState("Attack");
-	//MobSM.AddState("Knocked Back");
-	//MobSM.AddState("Stunned");
-	//MobSM.AddState("Dead");
-
-	//MobSM.SetState("Chase Target");
-}
-
-void Customer::Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos)
-{
-	this->EManager = EManager;
-	HP = 3000;
-	SetPosition(Vector3(50, 50, 0));
-	this->world_height = world_height;
-	this->world_width = world_width;
-	Speed = 5.f;
-	scale = 4.f;
-
-	//States
-	//MobSM.AddState("Chase Target");
-	//MobSM.AddState("Attack");
-	//MobSM.AddState("Knocked Back");
-	//MobSM.AddState("Stunned");
-	//MobSM.AddState("Dead");
-
-	//MobSM.SetState("Chase Target");
+	state = Find_Table;
+	state_delay_timer = 0;
+	scale = 3.f;
+	StartPos.Set(150, 45, 0);
+	Position = StartPos;
+	SeatPos.Set(115, 60, 0);
 }
 
 void Customer::Update(double dt)
 {
-	WrapAroundScreen();
-
+	switch (state)
+	{
+	case Customer::Find_Table:
+		break;
+	case Customer::Give_Order:
+		break;
+	case Customer::Wait_For_Food:
+		break;
+	case Customer::Eat_Food:
+		break;
+	case Customer::Give_Payment:
+		break;
+	case Customer::Leave_Restaurant:
+		break;
+	default:
+		break;
+	}
+	if (state_delay_timer < DELAY_TIME)
+		state_delay_timer += dt;
+	StateUpdate(dt);
 }
 
-void Customer::WrapAroundScreen()
+void Customer::StateUpdate(double dt)
 {
-#define OFFSET (scale * 0.5f)
+	if (state_delay_timer < DELAY_TIME)
+		return;
+	state_delay_timer = 0.f;
+	switch (state)
+	{
+	case Customer::Find_Table:
+		break;
+	case Customer::Give_Order:
+		break;
+	case Customer::Wait_For_Food:
+		break;
+	case Customer::Eat_Food:
+		break;
+	case Customer::Give_Payment:
+		break;
+	case Customer::Leave_Restaurant:
+		break;
+	default:
+		break;
+	}
+	state_delay_timer = 0.f;
+	InputMsg = "";
+}
 
-	if (Position.x > world_width + OFFSET)
-		Position.x = -OFFSET;
-	else if (Position.x < 0 - OFFSET)
-		Position.x = world_width + OFFSET;
-
-	if (Position.y > world_height + OFFSET)
-		Position.y = -OFFSET;
-	else if (Position.y < -OFFSET)
-		Position.y = world_height + OFFSET;
+std::string Customer::getState()
+{
+	switch (state)
+	{
+	case Customer::Find_Table:
+		return "Find_Table";
+		break;
+	case Customer::Give_Order:
+		return "Give_Order";
+		break;
+	case Customer::Wait_For_Food:
+		return "Wait_For_Food";
+		break;
+	case Customer::Eat_Food:
+		return "Eat_Food";
+		break;
+	case Customer::Give_Payment:
+		return "Give_Payment";
+		break;
+	case Customer::Leave_Restaurant:
+		return "Leave_Restaurant";
+		break;
+	default:
+		break;
+	}
+	return "";
 }

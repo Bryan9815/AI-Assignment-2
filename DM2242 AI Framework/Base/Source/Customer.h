@@ -9,20 +9,27 @@ public:
 	Customer();
 	~Customer();
 
-	void Init(EntityManager* EManager, float world_width, float world_height);
-	void Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos);
+	enum State
+	{
+		Find_Table,
+		Give_Order,
+		Wait_For_Food,
+		Eat_Food,
+		Give_Payment,
+		Leave_Restaurant,
+	};
+
+	void Init();
 	void Update(double dt);
 
-	void DetermineTarget();
-	void WrapAroundScreen();
-
-	StateMachine CustomerSM;
+	void StateUpdate(double dt);
+	std::string getState();
 private:
+	State state;
+	float state_delay_timer;
 
-	float Speed;
-	float Cooldown;
-
-	EntityManager* EManager;
+	Vector3 StartPos;
+	Vector3 SeatPos;
 };
 
 #endif
