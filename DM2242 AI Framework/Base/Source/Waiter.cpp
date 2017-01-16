@@ -28,26 +28,29 @@ void Waiter::Init()
 void Waiter::Update(double dt)
 {
 	ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
-	distFromChef = EntityManager::GetInstance()->FindDistanceBetweenEntities("Waiter", "Chef");
+	distFromChef = (Position - ChefPos).Length();
 	CashierPos = EntityManager::GetInstance()->Find("Cashier")->GetPosition();
-	distFromCashier = EntityManager::GetInstance()->FindDistanceBetweenEntities("Waiter", "Cashier");
+	distFromCashier = (Position - CashierPos).Length();
 	distFromTable = (Position - TablePos).Length();
 	switch (state)
 	{
 	case Waiter::Idle:
-		if (Position != StartPos)
+		if (((Position - StartPos).Length()) >= 0.5f)
 		{
 			Position += (StartPos - Position).Normalize() * 10 * dt;
 		}
 		break;
 	case Waiter::Receive_Food_From_Chef:
-		Position += (ChefPos - Position).Normalize() * 10 * dt;
+		if (distFromChef >= (scale + scale + 0.5f))
+			Position += (ChefPos - Position).Normalize() * 10 * dt;
 		break;
 	case Waiter::Bring_Food_To_Table:
-		Position += (TablePos - Position).Normalize() * 10 * dt;
+		if (distFromTable >= (scale + 5.f + 0.5f))
+			Position += (TablePos - Position).Normalize() * 10 * dt;
 		break;
 	case Waiter::Pass_Bill_To_Cashier:
-		Position += (CashierPos - Position).Normalize() * 10 * dt;
+		if (distFromCashier >= (scale + scale + 0.5f))
+			Position += (CashierPos - Position).Normalize() * 10 * dt;
 	}
 	if (state_delay_timer < DELAY_TIME)
 		state_delay_timer += dt;
@@ -76,18 +79,18 @@ void Waiter::StateUpdate(double dt)
 		break;
 	case Waiter::Receive_Food_From_Chef:
 	{
-		if (distFromChef <= 1.f)
+		if (distFromChef <= (scale + scale + 0.5f))
 			state = Bring_Food_To_Table;
 		break;
 	}
 	case Waiter::Bring_Food_To_Table:
 	{
-		if (distFromTable <= 1.f)
+		if (distFromTable <= (scale + 5.f + 0.5f))
 			state = Pass_Bill_To_Cashier;
 		break;
 	}
 	case Waiter::Pass_Bill_To_Cashier:
-		if (distFromCashier <= 1.f)
+		if (distFromCashier <= (scale + scale + 0.5f))
 		{
 			EntityManager::GetInstance()->Talk_to(this, "Cashier", PASS_BILL_MSG);
 			state = Idle;
