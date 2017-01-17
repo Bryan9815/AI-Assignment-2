@@ -4,7 +4,7 @@
 #include "BaseEntity.h"
 #include "SingletonTemplate.h"
 
-class Chef : public BaseEntity, Singleton<Chef>
+class Chef : public BaseEntity,public Singleton<Chef>
 {
 public:
     Chef();

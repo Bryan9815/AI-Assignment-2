@@ -4,7 +4,7 @@
 #include "BaseEntity.h"
 #include "SingletonTemplate.h"
 
-class Cashier : public BaseEntity, Singleton<Cashier>
+class Cashier : public BaseEntity, public Singleton<Cashier>
 {
 public:
     Cashier();

@@ -6,7 +6,7 @@
 #include "Chef.h"
 #include "Cashier.h"
 #include "Customer.h"
-
+#include "MessageBoard.h"
 SceneAI::SceneAI()
 {
 }
@@ -403,12 +403,12 @@ void SceneAI::RenderMessageHistory()
     if (EntityManager::GetInstance()->MessageHistory.size() == 0)
         return;
     
-    for (int i = 0; i < EntityManager::GetInstance()->MessageHistory.size(); i++)
+    for (int i = 0; i < MessageBoard::GetInstance()->MessageHistory.size(); i++)
     {
         /*modelStack.PushMatrix();
         modelStack.Translate
         modelStack.PopMatrix();*/
-        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.05 + 0.025 * i), 3.f, Color(1.f, 1.f, 1.f), EntityManager::GetInstance()->MessageHistory[i]);
+        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.05 + 0.025 * i), 3.f, Color(1.f, 1.f, 1.f), MessageBoard::GetInstance()->MessageHistory[i]);
     }
     
 }

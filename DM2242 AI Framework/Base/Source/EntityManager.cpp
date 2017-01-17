@@ -1,5 +1,5 @@
 #include "EntityManager.h"
-
+#include "MessageBoard.h"
 
 EntityManager::EntityManager()
 {
@@ -228,17 +228,13 @@ void EntityManager::Talk_to(BaseEntity* talker, string receiver_name, string msg
         {
             (*it)->ReceiveMsg(msg);
 
-            if (MessageHistory.size() == 5)
-            {
-                vector<std::string>::iterator it2 = MessageHistory.begin();
-                MessageHistory.erase(it2);
-            }
+            
             string temp = talker->GetName();
             temp += " to ";
             temp += receiver_name;
             temp += ": ";
             temp += msg;
-            MessageHistory.push_back(temp);
+            MessageBoard::GetInstance()->Add_message(temp);
         }
     }
 }
