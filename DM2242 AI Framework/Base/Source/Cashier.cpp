@@ -39,10 +39,10 @@ void Cashier::StateChange()
     switch (state)
     {
     case Cashier::Idle:
-        /*if (InputMsg != IDLE_MSG)
-            return;*/
+        if (InputMsg != IDLE_MSG)
+            return;
         state = ReceiveOrder;
-        EntityManager::GetInstance()->Talk_to(this, "CustomerEntity", "Your order?");
+        //EntityManager::GetInstance()->Talk_to(this, "CustomerEntity", "Your order?");
         break;
     case Cashier::ReceiveOrder:
         if (InputMsg != RECEIVEORDER_MSG)
@@ -66,4 +66,25 @@ void Cashier::StateChange()
     }
     state_delay_timer = 0.f;
     InputMsg = "";
+}
+
+std::string Cashier::getState()
+{
+    switch (state)
+    {
+    case Cashier::Idle:
+        return "Idle";
+        break;
+    case Cashier::ReceiveOrder:
+        return "ReceiveOrder";
+        break;
+    case Cashier::PasssOrderToChef:
+        return "PasssOrderToChef";
+        break;
+    case Cashier::ReceivePayment:
+        return "ReceivePayment";
+        break;
+    default:
+        break;
+    }
 }

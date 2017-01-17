@@ -21,6 +21,7 @@ public:
     void Init(Vector3 startpos);
     void Update(double dt);
     void StateChange();
+    std::string getState();
 private:
     State state;
     float state_delay_timer;

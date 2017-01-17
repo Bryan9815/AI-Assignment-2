@@ -1,7 +1,7 @@
 #include "Chef.h"
 #include "EntityManager.h"
 #define IDLE_MSG "New order!"
-#define RECEIVEORDER_MSG ""
+#define RECEIVEORDER_MSG "New order!"
 #define COOK_MSG ""
 #define CALLWAITER_MSG "On the way!"
 #define DELAY_TIME 2.f
