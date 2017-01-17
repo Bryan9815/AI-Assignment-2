@@ -39,7 +39,10 @@ void Cashier::StateChange()
     case Cashier::Idle:
         if (InputMsg != IDLE_MSG && InputMsg != RECEIVEPAYMENT_MSG)
             return;
-        state = ReceiveOrder;
+        if (InputMsg == IDLE_MSG)
+            state = ReceiveOrder;
+        else
+            state = ReceivePayment;
         break;
     case Cashier::ReceiveOrder:
         state = PasssOrderToChef;
@@ -49,8 +52,7 @@ void Cashier::StateChange()
         state = Idle;
         break;
     case Cashier::ReceivePayment:
-        if (InputMsg != RECEIVEPAYMENT_MSG)
-            return;
+        
         state = Idle;
         break;
     default:
