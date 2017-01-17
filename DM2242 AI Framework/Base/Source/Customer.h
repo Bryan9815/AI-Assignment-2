@@ -26,6 +26,7 @@ public:
 	std::string getState();
 
 	void WaitForFood();
+	void EatFood();
 private:
 	State state;
 	float state_delay_timer;

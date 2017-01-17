@@ -37,7 +37,7 @@ void Cashier::StateChange()
     switch (state)
     {
     case Cashier::Idle:
-        if (InputMsg != IDLE_MSG)
+        if (InputMsg != IDLE_MSG && InputMsg != RECEIVEPAYMENT_MSG)
             return;
         state = ReceiveOrder;
         break;
@@ -46,7 +46,7 @@ void Cashier::StateChange()
         break;
     case Cashier::PasssOrderToChef:
 		EntityManager::GetInstance()->Talk_to(this, "Chef", "Here's the order!");
-        state = ReceivePayment;
+        state = Idle;
         break;
     case Cashier::ReceivePayment:
         if (InputMsg != RECEIVEPAYMENT_MSG)

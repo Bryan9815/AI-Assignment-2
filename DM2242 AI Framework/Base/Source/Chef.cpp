@@ -1,7 +1,6 @@
 #include "Chef.h"
 #include "EntityManager.h"
 #define IDLE_MSG "Here's the order!"
-#define CALLWAITER_MSG "On the way!"
 #define DELAY_TIME 2.f
 Chef::Chef()
 {
@@ -26,6 +25,15 @@ void Chef::Update(double dt)
     if (state_delay_timer < DELAY_TIME)
         state_delay_timer += dt;
     StateChange();    
+
+	switch (state)
+	{
+	case Chef::Idle:
+		if (InputMsg != IDLE_MSG)
+			return;
+		state = ReceiveOrder;
+		break;
+	}
 }
 
 void Chef::StateChange()
@@ -35,22 +43,12 @@ void Chef::StateChange()
     state_delay_timer = 0.f;
     switch (state)
     {
-    case Chef::Idle:
-        if (InputMsg != IDLE_MSG)
-            return;
-        state = ReceiveOrder;        
-        break;
     case Chef::ReceiveOrder:
         state = Cook;
         break;
     case Chef::Cook:
         EntityManager::GetInstance()->Talk_to(this, "Waiter", "Food's ready!");
-        state = CallWaiter;        
-        break;
-    case Chef::CallWaiter:
-        if (InputMsg != CALLWAITER_MSG)
-            return;
-        state = Idle;
+        state = CallWaiter;  
         break;
     default:
         break;
@@ -79,4 +77,9 @@ std::string Chef::getState()
         break;
     }
     return "";
+}
+
+void Chef::GoIdle()
+{
+	state = Idle;
 }

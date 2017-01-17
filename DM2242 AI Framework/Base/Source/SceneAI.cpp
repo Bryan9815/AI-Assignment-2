@@ -40,13 +40,13 @@ void SceneAI::Init()
 #define EntityMoveWidth m_worldWidth
 #define EntityMoveHeight (m_worldHeight * 0.25) * 3
 
-    Chef *chef = new Chef();
+	Chef *chef = Chef::GetInstance();
     chef->Init(Vector3(m_worldWidth * 0.4f, m_worldHeight * 0.33f, 0));
     
 	Waiter *waiter = Waiter::GetInstance();
     waiter->Init();
 	
-	Cashier *cashier = new Cashier();
+	Cashier *cashier = Cashier::GetInstance();
 	cashier->Init(Vector3(m_worldWidth *0.7f, m_worldHeight * 0.333f, 0));
 
 	Customer *customer = Customer::GetInstance();

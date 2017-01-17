@@ -16,6 +16,7 @@ public:
 		Give_Order_To_Cashier,
 		Receive_Food_From_Chef,
 		Bring_Food_To_Table,
+		Receive_Payment,
 		Pass_Bill_To_Cashier
 	};
 

@@ -67,7 +67,7 @@ void Customer::Update(double dt)
 	}
 	case Customer::Leave_Restaurant:
 	{
-		nextPoint = Waypoint[WaypointIndex];
+		/*nextPoint = Waypoint[WaypointIndex];
 		Vector3 direction = (nextPoint - Position).Normalize();
 		float distance = sqrt((nextPoint.x - Position.x) * (nextPoint.x - Position.x) + (nextPoint.y - Position.y) * (nextPoint.y - Position.y));
 		if (distance < (10 * dt))
@@ -90,7 +90,7 @@ void Customer::Update(double dt)
 				ArrivedAtPoint = false;
 			}
 		}
-		break;
+		break;*/
 	}
 	default:
 		break;
@@ -113,8 +113,6 @@ void Customer::StateUpdate(double dt)
 	case Customer::Give_Payment:
 		Waiter::GetInstance()->PassBill();
 		state = Leave_Restaurant;
-		break;
-	case Customer::Leave_Restaurant:
 		break;
 	default:
 		break;
@@ -154,4 +152,9 @@ std::string Customer::getState()
 void Customer::WaitForFood()
 {
 	state = Wait_For_Food;
+}
+
+void Customer::EatFood()
+{
+	state = Eat_Food;
 }

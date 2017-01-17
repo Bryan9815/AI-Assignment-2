@@ -1,5 +1,6 @@
 #include "Waiter.h"
 #include "Customer.h"
+#include "Chef.h"
 
 #define DELAY_TIME 2.f
 #define GIVE_ORDER_MSG "New Order!"
@@ -28,8 +29,8 @@ void Waiter::Init()
 
 void Waiter::Update(double dt)
 {
-	//ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
-	//distFromChef = (Position - ChefPos).Length();
+	ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
+	distFromChef = (Position - ChefPos).Length();
 	CashierPos = EntityManager::GetInstance()->Find("Cashier")->GetPosition();
 	distFromCashier = (Position - CashierPos).Length();
 	distFromTable = (Position - TablePos).Length();
@@ -102,13 +103,19 @@ void Waiter::StateUpdate(double dt)
 	case Waiter::Receive_Food_From_Chef:
 	{
 		if (distFromChef <= (scale + scale + 0.5f))
+		{
 			state = Bring_Food_To_Table;
+			Chef::GetInstance()->GoIdle();
+		}
 		break;
 	}
 	case Waiter::Bring_Food_To_Table:
 	{
 		if (distFromTable <= (scale + 5.f + 0.5f))
-			state = Pass_Bill_To_Cashier;
+		{
+			Customer::GetInstance()->EatFood();
+			state = Receive_Payment;
+		}
 		break;
 	}
 	case Waiter::Pass_Bill_To_Cashier:
@@ -144,9 +151,11 @@ std::string Waiter::getState()
     case Waiter::Bring_Food_To_Table:
         return "Bring_Food_To_Table";
         break;
-    case Waiter::Pass_Bill_To_Cashier:
-        return "Pass_Bill_To_Cashier";
-        break;
+	case Waiter::Receive_Payment:
+		return "Receive_Payment";
+	case Waiter::Pass_Bill_To_Cashier:
+		return "Pass_Bill_To_Cashier";
+		break;
     default:
         break;
     }
@@ -160,5 +169,5 @@ void Waiter::TakeOrder()
 
 void Waiter::PassBill()
 {
-	state == Pass_Bill_To_Cashier;
+	state = Pass_Bill_To_Cashier;
 }

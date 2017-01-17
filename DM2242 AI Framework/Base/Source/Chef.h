@@ -22,6 +22,8 @@ public:
     void Update(double dt);
     void StateChange();
     std::string getState();
+
+	void GoIdle();
 private:
     State state;
     float state_delay_timer;
