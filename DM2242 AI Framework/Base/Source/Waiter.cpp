@@ -74,8 +74,6 @@ void Waiter::StateUpdate(double dt)
 		return;
 	state_delay_timer = 0.f;
 
-	Customer* customer = new Customer();
-
 	switch (state)
 	{
 	case Waiter::Idle:

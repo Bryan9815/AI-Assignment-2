@@ -230,8 +230,6 @@ void SceneAI::RenderEntity()
             modelStack.Translate(temp.x, temp.y, temp.z);
             modelStack.Scale((*it)->GetScale(), (*it)->GetScale(), (*it)->GetScale());
             RenderMesh(meshList[GEO_RANGER], false);
-            
-
         }
         else if ((*it)->GetName() == "Waiter")
         {
@@ -284,26 +282,28 @@ void SceneAI::RenderEntityInfo()
         {
             Chef* chef = dynamic_cast<Chef*>((*it));
             Insert_Text_On_Screen(chef->GetPosition().x - 2.f, chef->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), chef->getState());
+			Insert_Text_On_Screen(chef->GetPosition().x - 2.f, chef->GetPosition().y + 3.f, 2.f, Color(1.f, 1.f, 1.f), chef->GetName());
         }
         else if ((*it)->GetName() == "Waiter")
         {
             Waiter* waiter = dynamic_cast<Waiter*>((*it));
-            Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), waiter->getState());
+			Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), waiter->getState());
+			Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y + 3.f, 2.f, Color(1.f, 1.f, 1.f), waiter->GetName());
         }
 		else if ((*it)->GetName() == "Customer")
 		{
 			Customer* customer = dynamic_cast<Customer*>((*it));
 			Insert_Text_On_Screen(customer->GetPosition().x - 2.f, customer->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), customer->getState());
+			Insert_Text_On_Screen(customer->GetPosition().x - 2.f, customer->GetPosition().y + 3.f, 2.f, Color(1.f, 1.f, 1.f), customer->GetName());
 		}
 		else if ((*it)->GetName() == "Cashier")
 		{
 			Cashier* cashier = dynamic_cast<Cashier*>((*it));
 			Insert_Text_On_Screen(cashier->GetPosition().x - 2.f, cashier->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), cashier->getState());
+			Insert_Text_On_Screen(cashier->GetPosition().x - 2.f, cashier->GetPosition().y + 3.f, 2.f, Color(1.f, 1.f, 1.f), cashier->GetName());
 		}
         modelStack.PopMatrix();
     }
-
-    
 }
 
 void SceneAI::RenderRestaurant()
@@ -358,10 +358,7 @@ void SceneAI::RenderMessageHistory()
     
     for (int i = 0; i < MessageBoard::GetInstance()->MessageHistory.size(); i++)
     {
-        /*modelStack.PushMatrix();
-        modelStack.Translate
-        modelStack.PopMatrix();*/
-        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.05 + 0.025 * i), 3.f, Color(1.f, 1.f, 1.f), MessageBoard::GetInstance()->MessageHistory[i]);
+        Insert_Text_On_Screen(m_worldWidth * 0.1f, m_worldHeight * (0.15 - 0.025 * i), 3.f, Color(1.f, 1.f, 1.f), MessageBoard::GetInstance()->MessageHistory[i]);
     }
     
 }
