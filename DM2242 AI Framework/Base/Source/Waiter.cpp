@@ -83,6 +83,10 @@ void Waiter::StateUpdate(double dt)
 		{
 			state = Receive_Food_From_Chef;
 		}
+		if (((Position - StartPos).Length()) <= 0.5f && Customer::GetInstance()->GetIdle())
+		{
+			Customer::GetInstance()->Init();
+		}
 		break;
 	case Waiter::Take_Order:
 		if (distFromTable <= (scale + 5.f + 0.5f))
@@ -113,7 +117,7 @@ void Waiter::StateUpdate(double dt)
 	{
 		if (distFromTable <= (scale + 5.f + 0.5f))
 		{
-			Customer::GetInstance()->EatFood();
+			Customer::GetInstance()->GetPayment();
 			state = Receive_Payment;
 		}
 		break;

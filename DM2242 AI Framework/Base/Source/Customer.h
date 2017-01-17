@@ -14,9 +14,10 @@ public:
 		Find_Table,
 		Give_Order,
 		Wait_For_Food,
-		Eat_Food,
 		Give_Payment,
+		Eat_Food,
 		Leave_Restaurant,
+		Idle,
 	};
 
 	void Init();
@@ -26,13 +27,15 @@ public:
 	std::string getState();
 
 	void WaitForFood();
-	void EatFood();
+	void GetPayment();
+	bool GetIdle();
 private:
 	State state;
 	float state_delay_timer;
+	bool idle;
 
 	int WaypointIndex;
-	bool ArrivedAtPoint = false;
+	bool ArrivedAtPoint;
 
 	Vector3 StartPos;
 	Vector3 SeatPos;

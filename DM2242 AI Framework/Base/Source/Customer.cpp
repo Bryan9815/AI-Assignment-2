@@ -22,6 +22,11 @@ void Customer::Init()
 	Position = StartPos;
 	SeatPos.Set(115, 60, 0);
 
+	idle = false;
+	ArrivedAtPoint = false;
+
+	Waypoint.clear();
+
 	Waypoint.push_back(StartPos);
 	Waypoint.push_back(Vector3(125, 45, 0));
 	Waypoint.push_back(SeatPos);
@@ -62,12 +67,14 @@ void Customer::Update(double dt)
 	}
 	case Customer::Give_Order:
 	{
+		WaypointIndex = 1;
+		ArrivedAtPoint = false;
 		Waiter::GetInstance()->TakeOrder();
 		break;
 	}
 	case Customer::Leave_Restaurant:
 	{
-		/*nextPoint = Waypoint[WaypointIndex];
+		nextPoint = Waypoint[WaypointIndex];
 		Vector3 direction = (nextPoint - Position).Normalize();
 		float distance = sqrt((nextPoint.x - Position.x) * (nextPoint.x - Position.x) + (nextPoint.y - Position.y) * (nextPoint.y - Position.y));
 		if (distance < (10 * dt))
@@ -82,7 +89,7 @@ void Customer::Update(double dt)
 		{
 			if (WaypointIndex == 0)
 			{
-				state = Find_Table;
+				state = Idle;
 			}
 			else
 			{
@@ -90,8 +97,11 @@ void Customer::Update(double dt)
 				ArrivedAtPoint = false;
 			}
 		}
-		break;*/
+		break;
 	}
+	case Customer::Idle:
+		idle = true;
+		break;
 	default:
 		break;
 	}
@@ -107,11 +117,11 @@ void Customer::StateUpdate(double dt)
 	state_delay_timer = 0.f;
 	switch (state)
 	{
-	case Customer::Eat_Food:
-		state = Give_Payment;
-		break;
 	case Customer::Give_Payment:
 		Waiter::GetInstance()->PassBill();
+		state = Eat_Food;
+		break;
+	case Customer::Eat_Food:
 		state = Leave_Restaurant;
 		break;
 	default:
@@ -143,6 +153,9 @@ std::string Customer::getState()
 	case Customer::Leave_Restaurant:
 		return "Leave_Restaurant";
 		break;
+	case Customer::Idle:
+		return "Idle";
+		break;
 	default:
 		break;
 	}
@@ -154,7 +167,12 @@ void Customer::WaitForFood()
 	state = Wait_For_Food;
 }
 
-void Customer::EatFood()
+void Customer::GetPayment()
 {
-	state = Eat_Food;
+	state = Give_Payment;
+}
+
+bool Customer::GetIdle()
+{
+	return idle;
 }
