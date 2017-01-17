@@ -1,4 +1,6 @@
 #include "Waiter.h"
+#include "Customer.h"
+
 #define DELAY_TIME 2.f
 #define GIVE_ORDER_MSG "New Order!"
 #define RECEIVE_FOOD_MSG "Food's ready!"
@@ -20,15 +22,15 @@ void Waiter::Init()
 	state = Idle;
 	state_delay_timer = 0;
 	scale = 3.f;
-	StartPos.Set(120, 55, 0);
+	StartPos.Set(90, 45, 0);
 	Position = StartPos;
 	TablePos.Set(107.777, 60, 0);
 }
 
 void Waiter::Update(double dt)
 {
-	ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
-	distFromChef = (Position - ChefPos).Length();
+	//ChefPos = EntityManager::GetInstance()->Find("Chef")->GetPosition();
+	//distFromChef = (Position - ChefPos).Length();
 	CashierPos = EntityManager::GetInstance()->Find("Cashier")->GetPosition();
 	distFromCashier = (Position - CashierPos).Length();
 	distFromTable = (Position - TablePos).Length();
@@ -39,6 +41,14 @@ void Waiter::Update(double dt)
 		{
 			Position += (StartPos - Position).Normalize() * 10 * dt;
 		}
+		break;
+	case Waiter::Take_Order:
+		if (distFromTable >= (scale + 5.f + 0.5f))
+			Position += (TablePos - Position).Normalize() * 10 * dt;
+		break;
+	case Waiter::Give_Order_To_Cashier:
+		if (distFromCashier >= (scale + scale + 0.5f))
+			Position += (CashierPos - Position).Normalize() * 10 * dt;
 		break;
 	case Waiter::Receive_Food_From_Chef:
 		if (distFromChef >= (scale + scale + 0.5f))
@@ -63,6 +73,9 @@ void Waiter::StateUpdate(double dt)
 	if (state_delay_timer < DELAY_TIME)
 		return;
 	state_delay_timer = 0.f;
+
+	Customer* customer = new Customer();
+
 	switch (state)
 	{
 	case Waiter::Idle:
@@ -73,11 +86,21 @@ void Waiter::StateUpdate(double dt)
 		}
 		break;
 	case Waiter::Take_Order:
+		if (distFromTable <= (scale + 5.f + 0.5f))
+		{
+			Customer::GetInstance()->WaitForFood();
+			state = Give_Order_To_Cashier;
+		}
 		break;
 	case Waiter::Give_Order_To_Cashier:
-		EntityManager::GetInstance()->Talk_to(this, "Cashier", GIVE_ORDER_MSG);
-		state = Idle;
+	{
+		if (distFromCashier <= (scale + scale + 0.5f))
+		{
+			EntityManager::GetInstance()->Talk_to(this, "Cashier", GIVE_ORDER_MSG);
+			state = Idle;
+		}
 		break;
+	}
 	case Waiter::Receive_Food_From_Chef:
 	{
 		if (distFromChef <= (scale + scale + 0.5f))
@@ -130,4 +153,14 @@ std::string Waiter::getState()
         break;
     }
     return "";
+}
+
+void Waiter::TakeOrder()
+{
+	state = Take_Order;
+}
+
+void Waiter::PassBill()
+{
+	state == Pass_Bill_To_Cashier;
 }

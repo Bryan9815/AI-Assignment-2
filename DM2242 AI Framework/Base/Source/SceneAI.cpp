@@ -43,13 +43,13 @@ void SceneAI::Init()
     Chef *chef = new Chef();
     chef->Init(Vector3(m_worldWidth * 0.4f, m_worldHeight * 0.33f, 0));
     
-	Waiter *waiter = new Waiter();
+	Waiter *waiter = Waiter::GetInstance();
     waiter->Init();
 	
 	Cashier *cashier = new Cashier();
 	cashier->Init(Vector3(m_worldWidth *0.7f, m_worldHeight * 0.333f, 0));
 
-	Customer *customer = new Customer();
+	Customer *customer = Customer::GetInstance();
 	customer->Init();
 }
 
@@ -290,6 +290,12 @@ void SceneAI::RenderEntityInfo()
             Waiter* waiter = dynamic_cast<Waiter*>((*it));
             Insert_Text_On_Screen(waiter->GetPosition().x - 2.f, waiter->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), waiter->getState());
         }
+		else if ((*it)->GetName() == "Customer")
+		{
+			Customer* customer = dynamic_cast<Customer*>((*it));
+			Insert_Text_On_Screen(customer->GetPosition().x - 2.f, customer->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), customer->getState());
+		}
+
         modelStack.PopMatrix();
     }
 

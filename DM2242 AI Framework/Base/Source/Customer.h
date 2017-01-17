@@ -3,7 +3,7 @@
 
 #include "EntityManager.h"
 
-class Customer : public BaseEntity
+class Customer : public BaseEntity, public Singleton<Customer>
 {
 public:
 	Customer();
@@ -24,12 +24,19 @@ public:
 
 	void StateUpdate(double dt);
 	std::string getState();
+
+	void WaitForFood();
 private:
 	State state;
 	float state_delay_timer;
 
+	int WaypointIndex;
+	bool ArrivedAtPoint = false;
+
 	Vector3 StartPos;
 	Vector3 SeatPos;
+	vector <Vector3> Waypoint;
+	Vector3 nextPoint;
 };
 
 #endif
