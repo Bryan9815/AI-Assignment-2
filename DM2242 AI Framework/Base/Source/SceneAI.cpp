@@ -295,7 +295,11 @@ void SceneAI::RenderEntityInfo()
 			Customer* customer = dynamic_cast<Customer*>((*it));
 			Insert_Text_On_Screen(customer->GetPosition().x - 2.f, customer->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), customer->getState());
 		}
-
+		else if ((*it)->GetName() == "Cashier")
+		{
+			Cashier* cashier = dynamic_cast<Cashier*>((*it));
+			Insert_Text_On_Screen(cashier->GetPosition().x - 2.f, cashier->GetPosition().y - 5.f, 2.f, Color(1.f, 1.f, 1.f), cashier->getState());
+		}
         modelStack.PopMatrix();
     }
 

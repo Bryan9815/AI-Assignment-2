@@ -4,7 +4,6 @@
 #define DELAY_TIME 2.f
 #define GIVE_ORDER_MSG "New Order!"
 #define RECEIVE_FOOD_MSG "Food's ready!"
-#define RECEIVE_FOOD_RESPONSE "On the way!"
 #define PASS_BILL_MSG "Here's the bill!"
 
 Waiter::Waiter()
@@ -81,7 +80,6 @@ void Waiter::StateUpdate(double dt)
 	case Waiter::Idle:
 		if (InputMsg == RECEIVE_FOOD_MSG)
 		{
-			EntityManager::GetInstance()->Talk_to(this, "Chef", RECEIVE_FOOD_RESPONSE);
 			state = Receive_Food_From_Chef;
 		}
 		break;

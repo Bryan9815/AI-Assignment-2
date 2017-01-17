@@ -1,6 +1,6 @@
 #include "Chef.h"
 #include "EntityManager.h"
-#define IDLE_MSG "New order!"
+#define IDLE_MSG "Here's the order!"
 #define RECEIVEORDER_MSG "New order!"
 #define COOK_MSG ""
 #define CALLWAITER_MSG "On the way!"
@@ -8,7 +8,7 @@
 Chef::Chef()
 {
     Name = "Chef";
-    state = Cook;
+    state = Idle;
     state_delay_timer = 0;
     EntityManager::GetInstance()->AddEntity(this);
 }
@@ -45,12 +45,9 @@ void Chef::StateChange()
     case Chef::ReceiveOrder:
         if (InputMsg != RECEIVEORDER_MSG)
             return;
-        EntityManager::GetInstance()->Talk_to(this, "Cashier", "Got it");
         state = Cook;
         break;
     case Chef::Cook:
-        //if (InputMsg != COOK_MSG)
-            //return;
         EntityManager::GetInstance()->Talk_to(this, "Waiter", "Food's ready!");
         state = CallWaiter;        
         break;
