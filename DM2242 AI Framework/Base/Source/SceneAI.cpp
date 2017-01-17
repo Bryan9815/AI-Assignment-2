@@ -349,7 +349,7 @@ void SceneAI::RenderRestaurant()
 
 void SceneAI::RenderMessageHistory()
 {
-    if (EntityManager::GetInstance()->MessageHistory.size() == 0)
+    if (MessageBoard::GetInstance()->MessageHistory.size() == 0)
         return;
     
     for (int i = 0; i < MessageBoard::GetInstance()->MessageHistory.size(); i++)
