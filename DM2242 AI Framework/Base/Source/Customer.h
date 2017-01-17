@@ -3,26 +3,40 @@
 
 #include "EntityManager.h"
 
-class Customer : public BaseEntity
+class Customer : public BaseEntity, public Singleton<Customer>
 {
 public:
 	Customer();
 	~Customer();
 
-	void Init(EntityManager* EManager, float world_width, float world_height);
-	void Init(EntityManager* EManager, float world_width, float world_height, Vector3 startpos);
+	enum State
+	{
+		Find_Table,
+		Give_Order,
+		Wait_For_Food,
+		Eat_Food,
+		Give_Payment,
+		Leave_Restaurant,
+	};
+
+	void Init();
 	void Update(double dt);
 
-	void DetermineTarget();
-	void WrapAroundScreen();
+	void StateUpdate(double dt);
+	std::string getState();
 
-	StateMachine CustomerSM;
+	void WaitForFood();
 private:
+	State state;
+	float state_delay_timer;
 
-	float Speed;
-	float Cooldown;
+	int WaypointIndex;
+	bool ArrivedAtPoint = false;
 
-	EntityManager* EManager;
+	Vector3 StartPos;
+	Vector3 SeatPos;
+	vector <Vector3> Waypoint;
+	Vector3 nextPoint;
 };
 
 #endif

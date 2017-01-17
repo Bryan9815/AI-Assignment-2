@@ -3,7 +3,7 @@
 
 #include "EntityManager.h"
 
-class Waiter : public BaseEntity
+class Waiter : public BaseEntity, public Singleton<Waiter>
 {
 public:
 	Waiter();
@@ -24,6 +24,9 @@ public:
 
 	void StateUpdate(double dt);
     std::string getState();
+
+	void TakeOrder();
+	void PassBill();
 private:
 	State state;
 	float state_delay_timer;
